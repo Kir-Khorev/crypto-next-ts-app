@@ -1,5 +1,9 @@
 const CurrencyRow = (props: any) => {
     const { currencyOptions, selectedCurrency, onChangeCurrency, } = props;
+    if (!currencyOptions) {
+        return <div>Load props...</div>
+    }
+
     return (
         // <div className='currencySelect currencySelectWrapper' onChange={onChangeCurrency}>
         <select className="form-select" aria-label="Default select example" onChange={onChangeCurrency} value={selectedCurrency}>
