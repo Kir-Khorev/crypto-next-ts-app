@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { useEffect } from "react";
 import getAllСryptocurrencies from '../api/getAllСryptocurrencies';
 
-export function MainLayout({ children, title = 'Next App Layout' }):any {
+export function MainLayout({ children, title = 'Next App Layout' }: any) {
     useEffect(() => { typeof document !== undefined ? require('bootstrap/dist/js/bootstrap') : null }, [])
 
     return (
