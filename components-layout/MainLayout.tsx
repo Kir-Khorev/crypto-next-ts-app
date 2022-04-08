@@ -26,9 +26,7 @@ export function MainLayout({ children, title = 'Next App Layout' }: any) {
             </main>
 
             <footer className="footer">
-                <Link href={'/'}><a>Home</a></Link>
-                <Link href={'/about'}><a>About</a></Link>
-                <Link href={'/posts'}><a>Posts</a></Link>
+                <p>Footer 2022. by khorek</p>
             </footer>
 
             <style jsx global>
