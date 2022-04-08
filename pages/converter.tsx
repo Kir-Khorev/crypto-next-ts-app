@@ -6,7 +6,7 @@ import { NextPageContext } from "next";
 import { useEffect, useState } from 'react';
 
 
-const Converter: NextPage = ({ currencies: serverCurrencies }) => {
+const Converter: NextPage = ({ currencies: serverCurrencies }: any) => {
     const [currencies, setCurrencies] = useState(serverCurrencies);
 
     useEffect(() => {
