@@ -36,7 +36,7 @@ const Converter: NextPage = ({ currencies: serverCurrencies }: any) => {
                     <h1>Converter Page. Next.js React Crypto SPA</h1>
                     <section>
                         {
-                            currencies.data.map((item):any => {
+                            currencies.data.map((item: any) => {
                                 return <div key={item.id}>
                                     {item.name}
                                 </div>
