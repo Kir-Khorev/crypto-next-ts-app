@@ -1,0 +1,12 @@
+.watchlist {
+    max-width: 90%;
+    max-height: 90%;
+    margin: auto;
+    overflow: scroll;
+    margin: 50px auto;
+}
+
+.watchlist h2 {
+    text-align: center;
+    margin: 10px auto;
+}

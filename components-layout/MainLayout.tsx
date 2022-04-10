@@ -53,6 +53,7 @@ export function MainLayout({ children, title = 'Next App Layout' }: any) {
                         right: 0;
                         bottom: 0;
                         background: lightblue;
+                        color: white;
                         display: flex;
                         justify-content: space-around;
                         align-items: center;

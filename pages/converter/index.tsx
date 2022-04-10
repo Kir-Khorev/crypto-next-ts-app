@@ -1,26 +1,21 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { MainLayout } from '../../components-layout/MainLayout';
-import getAllСryptocurrencies from '../../api/getAllСryptocurrencies';
 import { NextPageContext } from "next";
 import { useEffect, useState } from 'react';
 import CurrencyRow from './currency-row';
+import icon from '../../assets/arrow.svg';
+import Image from 'next/image';
 
 const Converter: NextPage = ({ currencies: serverCurrencies }: any) => {
     const [currencies, setCurrencies] = useState(serverCurrencies);
-
     const [amount, setAmount] = useState(1);
-    const [fromCurrency, setFromCurrency] = useState(0);
-    const [toCurrency, setToCurrency] = useState(0);
-    console.log('amount', amount);
-    console.log('fromCurrency', fromCurrency);
-
+    const [fromCurrency, setFromCurrency] = useState(currencies.data[0].values.USD.price);
+    const [toCurrency, setToCurrency] = useState(currencies.data[4].values.USD.price);
 
     useEffect(() => {
         async function load() {
-            const res = await currencies;
             const json = await currencies.json()
-            console.log("json", json);
             setCurrencies(json)
         }
         if (!serverCurrencies) {
@@ -45,7 +40,7 @@ const Converter: NextPage = ({ currencies: serverCurrencies }: any) => {
                     <Head>
 
                     </Head>
-                    <h1>Converter Page. Next.js React Crypto SPA</h1>
+                    <h1>Converter Page</h1>
                     {/* Amount */}
                     <div className="input-group">
                         <input value={amount} onChange={handleChange} type="text" className="form-control" placeholder="1" aria-label="Recipient's username" aria-describedby="basic-addon2" />
@@ -55,16 +50,22 @@ const Converter: NextPage = ({ currencies: serverCurrencies }: any) => {
                         </div>
                     </div>
 
-                    {/* Currensies row */}
+                    {/* Converter */}
                     <div className='currencyRows'>
                         <h2>Choose currencies:</h2>
-                        {/* First dropdown */}
+                        {/* Choose first currensies */}
                         <CurrencyRow currencyOptions={currencies.data} selectedCurrency={fromCurrency}
                             onChangeCurrency={(e: any) => setFromCurrency(e.target.value)} />
-                        <hr/>
-                        {/* Second dropdown */}
+                       
+                        <div className='currencyRow--icon'>
+                            <Image src={icon} width="70px" height='70px' alt='arrow-icon' />
+                        </div>
+
+                        {/* Chose second currensies */}
                         <CurrencyRow currencyOptions={currencies.data} selectedCurrency={toCurrency}
-                            onChangeCurrency={(e: any) => setToCurrency(e.target.value)} />
+                            onChangeCurrency={(e: any) => {
+                                setToCurrency(e.target.value)
+                            }} />
                     </div>
 
                     {/* Result */}
