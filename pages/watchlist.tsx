@@ -46,8 +46,8 @@ const WatchList: NextPage = ({ currencies: serverCurrencies }: any) => {
                                 {
                                     currencies.data.map((item: any) => {
                                         return (
-                                            <Link href={`/coin/[id]`} as={`/coin/${item.id}`}>
-                                                <tr key={item.id} >
+                                            <Link key={item.id} href={`/coin/[id]`} as={`/coin/${item.id}`}>
+                                                <tr>
                                                     <td>{item.id}</td>
                                                     <td>{item.name} ({item.symbol})</td>
                                                     <td>${parseFloat(item.values.USD.price).toFixed(3)}</td>
