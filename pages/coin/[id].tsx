@@ -3,7 +3,6 @@ import type { NextPage } from 'next'
 import { useState, useEffect } from "react";
 import { MainLayout } from '../../components-layout/MainLayout';
 import { useRouter } from 'next/router'
-import Image from 'next/image';
 import Link from "next/link";
 
 const Coin: NextPage = ({ coin: serverCoin }: any): any => {
@@ -20,9 +19,6 @@ const Coin: NextPage = ({ coin: serverCoin }: any): any => {
             load()
         }
     }, [])
-
-    console.log(coin);
-
 
     if (!coin) {
         return <MainLayout>
@@ -54,7 +50,7 @@ const Coin: NextPage = ({ coin: serverCoin }: any): any => {
                     <li className="list-group-item list-group-item-action list-group-item-light">Max supply: {coin.maxSupply.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")}</li>
                     <li className="list-group-item list-group-item-action list-group-item-light">Total supply: {coin.totalSupply.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")}</li>
                     <li className="list-group-item list-group-item-action list-group-item-light">Type: {coin.type}</li>
-                    <li className="list-group-item list-group-item-action list-group-item-light">Official WebSite: <a href={coin.links[0].value} target="_blank">{coin.links[0].value}</a></li>
+                    <li className="list-group-item list-group-item-action list-group-item-light">Official WebSite: <a href={coin.links[0].value} rel="noreferrer" target="_blank">{coin.links[0].value}</a></li>
                 </ul>
                 <div className="card-body">
                     <Link href={`/coin`} as={`/coin`}><button className="btn btn-primary">Back to list</button></Link>
