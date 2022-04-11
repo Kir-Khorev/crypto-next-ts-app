@@ -52,7 +52,6 @@ const Converter: NextPage = ({ currencies: serverCurrencies }: any) => {
 
                     {/* Converter */}
                     <div className='currencyRows'>
-                        <h2>Choose currencies:</h2>
                         {/* Choose first currensies */}
                         <CurrencyRow currencyOptions={currencies.data} selectedCurrency={fromCurrency}
                             onChangeCurrency={(e: any) => setFromCurrency(e.target.value)} />

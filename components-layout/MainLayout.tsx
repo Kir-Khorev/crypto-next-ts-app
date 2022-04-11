@@ -19,7 +19,7 @@ export function MainLayout({ children, title = 'Next App Layout' }: any) {
             <nav>
                 <Link href={'/'}><a>Home</a></Link>
                 <Link href={'/converter'}><a>Converter</a></Link>
-                <Link href={'/watchlist'}><a>Watchlist</a></Link>
+                <Link href={'/coin'}><a>Watchlist</a></Link>
             </nav>
             <main>
                 {children}
@@ -45,7 +45,12 @@ export function MainLayout({ children, title = 'Next App Layout' }: any) {
                     nav a {
                         color: white;
                         text-decoration: none;
+                        transition: all ease-in .3s;
                     }
+                    nav a:hover {
+                        color: lightblue;
+                    }
+
                     footer {
                         position: fixed;
                         height: 60px;

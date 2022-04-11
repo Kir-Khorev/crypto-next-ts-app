@@ -5,7 +5,6 @@ const CurrencyRow = (props: any) => {
     }
 
     return (
-        // <div className='currencySelect currencySelectWrapper' onChange={onChangeCurrency}>
         <select className="form-select" aria-label="Default select example" onChange={onChangeCurrency} value={selectedCurrency}>
             {
                 currencyOptions.map((i: any) => {
@@ -13,7 +12,6 @@ const CurrencyRow = (props: any) => {
                 })
             }
         </select>
-        // </div>
     )
 }
 

@@ -16,7 +16,16 @@
 
 
 .input-group {
-  max-width: 40%;  
+  max-width: 40%;
+  margin: 20px auto;  
+}
+
+.input-group button {
+  border: 1px solid white;
+  color: aliceblue;
+  font-size: 25px;
+  width: 6vw;
+  padding: 10px;
 }
 
 .currencyRow--icon {

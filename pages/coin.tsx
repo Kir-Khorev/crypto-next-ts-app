@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 import Link from "next/link";
 
 
-const WatchList: NextPage = ({ currencies: serverCurrencies }: any) => {
+const Coins: NextPage = ({ currencies: serverCurrencies }: any) => {
     const [currencies, setCurrencies] = useState(serverCurrencies);
 
     useEffect(() => {
@@ -22,7 +22,15 @@ const WatchList: NextPage = ({ currencies: serverCurrencies }: any) => {
     }, [])
 
     // Preload
-    if (!currencies) (<div>Load...</div>)
+    if (!currencies) (
+        <div className="text-center">
+            <div className="spinner-border" role="status">
+                <span className="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    )
+
+    
 
     return (
         <>
@@ -47,7 +55,7 @@ const WatchList: NextPage = ({ currencies: serverCurrencies }: any) => {
                                     currencies.data.map((item: any) => {
                                         return (
                                             <Link key={item.id} href={`/coin/[id]`} as={`/coin/${item.id}`}>
-                                                <tr>
+                                                <tr className="watchlistItem">
                                                     <td>{item.id}</td>
                                                     <td>{item.name} ({item.symbol})</td>
                                                     <td>${parseFloat(item.values.USD.price).toFixed(3)}</td>
@@ -67,7 +75,7 @@ const WatchList: NextPage = ({ currencies: serverCurrencies }: any) => {
     )
 }
 
-export default WatchList;
+export default Coins;
 
 // getStaticProps - третий вариант.
 // Используется если контент страницы зависит от внешних данных
