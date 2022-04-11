@@ -6,7 +6,7 @@ import { MainLayout } from '../components-layout/MainLayout'
 import logo from '../assets/favicon.ico';
 import { useEffect, useState } from 'react';
 import Link from "next/link";
-
+import { ICoinItem } from '../interfaces/coin';
 
 const Coins: NextPage = ({ currencies: serverCurrencies }: any) => {
     const [currencies, setCurrencies] = useState(serverCurrencies);
@@ -30,8 +30,6 @@ const Coins: NextPage = ({ currencies: serverCurrencies }: any) => {
         </div>
     )
 
-    
-
     return (
         <>
             <MainLayout title={'WatchList Page'}>
@@ -39,7 +37,7 @@ const Coins: NextPage = ({ currencies: serverCurrencies }: any) => {
                     <Head>
                     </Head>
                     <div className="watchlist">
-                        <h2>WatchList Page</h2>
+                        <h2>CoinsList Page</h2>
                         <table className="table table-hover table-sm table-responsive">
                             <thead className="table-dark">
                                 <tr className="table-light">
@@ -52,7 +50,7 @@ const Coins: NextPage = ({ currencies: serverCurrencies }: any) => {
                             </thead>
                             <tbody>
                                 {
-                                    currencies.data.map((item: any) => {
+                                    currencies.data.map((item: ICoinItem) => {
                                         return (
                                             <Link key={item.id} href={`/coin/[id]`} as={`/coin/${item.id}`}>
                                                 <tr className="watchlistItem">

@@ -1,9 +1,15 @@
 .coinCardItem {
     max-width: 50%;
     margin: 50px auto;
-    background: rgba(71, 255, 252, 0.332);
+    background: rgba(71, 255, 252, 0.332) !important;
+    margin: 5rem auto;
 }
 
 .card-body {
+    margin: auto;
+}
+
+.card-body img {
+    display: block;
     margin: auto;
 }

@@ -1,7 +1,10 @@
-const CurrencyRow = (props: any) => {
+import { ICurrencyRow } from "../../interfaces/currency-row";
+
+const CurrencyRow = (props: ICurrencyRow) => {
     const { currencyOptions, selectedCurrency, onChangeCurrency, } = props;
+
     if (!currencyOptions) {
-        return <div>Load props...</div>
+        return <div>Loading...</div>
     }
 
     return (

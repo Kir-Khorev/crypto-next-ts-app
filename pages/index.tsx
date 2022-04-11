@@ -6,7 +6,6 @@ import { MainLayout } from '../components-layout/MainLayout'
 import Link from "next/link"
 import logo from '../assets/favicon.ico';
 
-
 const Home: NextPage = () => {
   return (
     <>

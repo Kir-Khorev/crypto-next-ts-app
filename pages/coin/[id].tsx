@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { MainLayout } from '../../components-layout/MainLayout';
 import { useRouter } from 'next/router'
 import Link from "next/link";
+import { IMyCoin } from '../../interfaces/coin';
 
 const Coin: NextPage = ({ coin: serverCoin }: any): any => {
     const router = useRouter();
@@ -29,6 +30,9 @@ const Coin: NextPage = ({ coin: serverCoin }: any): any => {
             </div>
         </MainLayout>
     }
+
+    console.log(coin);
+    
 
 
     const srcToImageType: unknown = coin ? Object.values(coin.images)[1] : '';

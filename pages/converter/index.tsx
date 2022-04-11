@@ -55,12 +55,12 @@ const Converter: NextPage = ({ currencies: serverCurrencies }: any) => {
                         {/* Choose first currensies */}
                         <CurrencyRow currencyOptions={currencies.data} selectedCurrency={fromCurrency}
                             onChangeCurrency={(e: any) => setFromCurrency(e.target.value)} />
-                       
+
                         <div className='currencyRow--icon'>
                             <Image src={icon} width="70px" height='70px' alt='arrow-icon' />
                         </div>
 
-                        {/* Chose second currensies */}
+                        {/* Choose second currensies */}
                         <CurrencyRow currencyOptions={currencies.data} selectedCurrency={toCurrency}
                             onChangeCurrency={(e: any) => {
                                 setToCurrency(e.target.value)
