@@ -9,14 +9,15 @@ import logo from '../assets/favicon.ico';
 const Home: NextPage = () => {
   return (
     <>
-      <MainLayout title={'Home Page'}>
+      <MainLayout title={'Home Page | Next.js'}>
         <div>
           <Head>
-            <title>My Own Title Next.js</title>
+            <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+            <meta name="description" content="Meta description for the Home page" />
           </Head>
           <div className="app-header">
-            <h1>Home Page. Next.js React Crypto SPA</h1>
-            <Image src={logo} alt="me" width="64" height="64" />
+            <h1>Home Page. Next.js Crypto SPA</h1>
+            <Image src={logo} alt="me" width="64" height="64" className="App-logo" style={{ width: '100px', margin: 'auto' }} />
           </div>
         </div>
       </MainLayout>

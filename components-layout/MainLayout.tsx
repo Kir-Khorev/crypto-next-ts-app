@@ -4,13 +4,13 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { useEffect } from "react";
 import getAllСryptocurrencies from '../api/getAllСryptocurrencies';
 
-export function MainLayout({ children, title = 'Next App Layout' }: any) {
+export function MainLayout({ children, title = 'Next App CryptoCurrencies' }: any) {
     useEffect(() => { typeof document !== undefined ? require('bootstrap/dist/js/bootstrap') : null }, [])
 
     return (
         <>
             <Head>
-                <title>{title} | Next Kurs</title>
+                <title>{title} | Next.js</title>
                 <meta name="keywords" content="Key, My, Posts"></meta>
                 <meta name="description" content="This is my posts description"></meta>
                 <meta name="charSet" content="utf-8"></meta>
@@ -19,7 +19,7 @@ export function MainLayout({ children, title = 'Next App Layout' }: any) {
             <nav>
                 <Link href={'/'}><a>Home</a></Link>
                 <Link href={'/converter'}><a>Converter</a></Link>
-                <Link href={'/coin'}><a>Watchlist</a></Link>
+                <Link href={'/coin'}><a>Coin List</a></Link>
             </nav>
             <main>
                 {children}
@@ -37,7 +37,7 @@ export function MainLayout({ children, title = 'Next App Layout' }: any) {
                         left: 0;
                         right: 0;
                         top: 0;
-                        background: lightcoral;
+                        background: #0d6efd;
                         display: flex;
                         justify-content: space-around;
                         align-items: center;
@@ -57,7 +57,7 @@ export function MainLayout({ children, title = 'Next App Layout' }: any) {
                         left: 0;
                         right: 0;
                         bottom: 0;
-                        background: lightblue;
+                        background: lightcoral;
                         color: white;
                         display: flex;
                         justify-content: space-around;

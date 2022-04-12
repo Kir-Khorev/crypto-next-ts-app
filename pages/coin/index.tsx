@@ -2,11 +2,11 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import { NextPageContext } from "next";
-import { MainLayout } from '../components-layout/MainLayout'
+import { MainLayout } from '../../components-layout/MainLayout'
 import logo from '../assets/favicon.ico';
 import { useEffect, useState } from 'react';
 import Link from "next/link";
-import { ICoinItem } from '../interfaces/coin';
+import { ICoinItem } from '../../interfaces/coin';
 
 const Coins: NextPage = ({ currencies: serverCurrencies }: any) => {
     const [currencies, setCurrencies] = useState(serverCurrencies);
@@ -32,9 +32,11 @@ const Coins: NextPage = ({ currencies: serverCurrencies }: any) => {
 
     return (
         <>
-            <MainLayout title={'WatchList Page'}>
+            <MainLayout title={'Currencies List Page'}>
                 <div>
                     <Head>
+                        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+                        <meta name="description" content="Currencies List Page. Info table." />
                     </Head>
                     <div className="watchlist">
                         <h2>CoinsList Page</h2>
@@ -75,8 +77,7 @@ const Coins: NextPage = ({ currencies: serverCurrencies }: any) => {
 
 export default Coins;
 
-// getStaticProps - третий вариант.
-// Используется если контент страницы зависит от внешних данных
+// getStaticProps 
 
 export async function getStaticProps(ctx: NextPageContext) {
     const res = await fetch(`https://api.cryptorank.io/v1/currencies?api_key=e3440fe2cc290ca0ad530b27be5f05cc00db9ecbcbb0d1babeaddede1b21`)

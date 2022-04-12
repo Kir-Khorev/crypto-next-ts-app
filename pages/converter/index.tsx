@@ -38,7 +38,8 @@ const Converter: NextPage = ({ currencies: serverCurrencies }: any) => {
             <MainLayout title={'Converter Page'}>
                 <section className='converter'>
                     <Head>
-
+                        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+                        <meta name="description" content="Converter Page. Info about price all crypto currencies." />
                     </Head>
                     <h1>Converter Page</h1>
                     {/* Amount */}
@@ -80,8 +81,7 @@ const Converter: NextPage = ({ currencies: serverCurrencies }: any) => {
 
 export default Converter;
 
-// getStaticProps - третий вариант.
-// Используется если контент страницы зависит от внешних данных
+// getStaticProps
 
 export async function getStaticProps(ctx: NextPageContext) {
     const res = await fetch('https://api.cryptorank.io/v1/currencies?api_key=e3440fe2cc290ca0ad530b27be5f05cc00db9ecbcbb0d1babeaddede1b21')

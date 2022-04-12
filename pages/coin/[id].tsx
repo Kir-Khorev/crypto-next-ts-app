@@ -32,13 +32,16 @@ const Coin: NextPage = ({ coin: serverCoin }: any): any => {
     }
 
     console.log(coin);
-    
+
     const srcToImageType: unknown = coin ? Object.values(coin.images)[1] : '';
     const srcToImage: string = srcToImageType as string;
 
     return (
-        <MainLayout title={`${coin.name} Coin Page`}>
+        <MainLayout title={`${coin.name} | CryptoCoin Page`}>
             <Head>
+                <title>{coin.name} | All info</title>
+                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+                <meta name="description" content={coin.name + ' — All info about Cryptocurrency'} />
             </Head>
             <div className="card coinCardItem">
                 <div className="card-body">

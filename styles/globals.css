@@ -2,6 +2,7 @@
 @import url('./converterPage.css');
 @import url('./watchlist.css');
 @import url('./coinPage.css');
+@import url('./404.css');
 
 html,
 body {
@@ -18,4 +19,8 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+main {
+  margin: 20px auto;
 }
