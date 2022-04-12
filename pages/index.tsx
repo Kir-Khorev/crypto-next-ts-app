@@ -5,6 +5,7 @@ import styles from '../styles/Home.module.css'
 import { MainLayout } from '../components-layout/MainLayout'
 import Link from "next/link"
 import logo from '../assets/favicon.ico';
+import AthData from './converter/ath'
 
 const Home: NextPage = () => {
   return (
@@ -17,6 +18,7 @@ const Home: NextPage = () => {
           </Head>
           <div className="app-header">
             <h1>Home Page. Next.js Crypto SPA</h1>
+            <AthData/>
             <Image src={logo} alt="me" width="64" height="64" className="App-logo" style={{ width: '100px', margin: 'auto' }} />
           </div>
         </div>
