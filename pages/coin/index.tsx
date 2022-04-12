@@ -1,12 +1,11 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import Image from 'next/image'
 import { NextPageContext } from "next";
 import { MainLayout } from '../../components-layout/MainLayout'
-import logo from '../assets/favicon.ico';
 import { useEffect, useState } from 'react';
 import Link from "next/link";
 import { ICoinItem } from '../../interfaces/coin';
+import { apiKey } from '../api/apikey';
 
 const Coins: NextPage = ({ currencies: serverCurrencies }: any) => {
     const [currencies, setCurrencies] = useState(serverCurrencies);
@@ -21,7 +20,7 @@ const Coins: NextPage = ({ currencies: serverCurrencies }: any) => {
         }
     }, [])
 
-    // Preload
+    // Preloader
     if (!currencies) (
         <div className="text-center">
             <div className="spinner-border" role="status">
@@ -80,7 +79,7 @@ export default Coins;
 // getStaticProps 
 
 export async function getStaticProps(ctx: NextPageContext) {
-    const res = await fetch(`https://api.cryptorank.io/v1/currencies?api_key=e3440fe2cc290ca0ad530b27be5f05cc00db9ecbcbb0d1babeaddede1b21`)
+    const res = await fetch(`https://api.cryptorank.io/v1/currencies?api_key=${apiKey}`)
     const currencies = await res.json()
     return { props: { currencies } }
 }

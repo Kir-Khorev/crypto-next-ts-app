@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { MainLayout } from '../../components-layout/MainLayout';
 import { useRouter } from 'next/router'
 import Link from "next/link";
-// import { ICoinItem } from '../../interfaces/coin';
+import { apiKey } from '../api/apikey';
 
 const Coin: NextPage = ({ coin: serverCoin }: any): any => {
     const router = useRouter();
@@ -12,7 +12,7 @@ const Coin: NextPage = ({ coin: serverCoin }: any): any => {
 
     useEffect(() => {
         async function load() {
-            const res = await fetch(`https://api.cryptorank.io/v1/currencies/${router.query.id}?api_key=e3440fe2cc290ca0ad530b27be5f05cc00db9ecbcbb0d1babeaddede1b21`)
+            const res = await fetch(`https://api.cryptorank.io/v1/currencies/${router.query.id}?api_key=${apiKey}`);
             const data = await res.json()
             setCoin(data.data)
         }
@@ -21,6 +21,7 @@ const Coin: NextPage = ({ coin: serverCoin }: any): any => {
         }
     }, [])
 
+    // Preloader
     if (!coin) {
         return <MainLayout>
             <div className="text-center">
@@ -31,11 +32,11 @@ const Coin: NextPage = ({ coin: serverCoin }: any): any => {
         </MainLayout>
     }
 
-    console.log(coin);
-
+    // Src to image
     const srcToImageType: unknown = coin ? Object.values(coin.images)[1] : '';
     const srcToImage: string = srcToImageType as string;
 
+    // Render page
     return (
         <MainLayout title={`${coin.name} | CryptoCoin Page`}>
             <Head>
@@ -67,12 +68,14 @@ const Coin: NextPage = ({ coin: serverCoin }: any): any => {
 
 export default Coin;
 
+// Get initial Props
+
 Coin.getInitialProps = async (ctx: any) => {
     // Context Object
     if (!ctx.req) {
         return { coin: null }
     }
-    const res = await fetch(`https://api.cryptorank.io/v1/currencies/${ctx.query.id}?api_key=e3440fe2cc290ca0ad530b27be5f05cc00db9ecbcbb0d1babeaddede1b21`)
+    const res = await fetch(`https://api.cryptorank.io/v1/currencies/${ctx.query.id}?api_key=${apiKey}`)
     const coin = await res.json()
 
     return {
