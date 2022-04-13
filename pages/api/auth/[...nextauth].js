@@ -11,11 +11,4 @@ export default NextAuth({
         }),
         // ...add more providers here
     ],
-
-    // providers: [
-    //     Providers.GithubProvider({
-    //         clientId: process.env.GITHUB_ID,
-    //         clientSecret: process.env.GITHUB_SECRET,
-    //     }),
-    // ],
 })
