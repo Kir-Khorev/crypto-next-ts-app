@@ -5,6 +5,7 @@ import { MainLayout } from '../../components-layout/MainLayout';
 import { useRouter } from 'next/router'
 import Link from "next/link";
 import { apiKey } from '../api/apikey';
+import { Preloader } from '../../components-layout/preloader';
 
 const Coin: NextPage = ({ coin: serverCoin }: any): any => {
     const router = useRouter();
@@ -21,20 +22,14 @@ const Coin: NextPage = ({ coin: serverCoin }: any): any => {
         }
     }, [])
 
-    // Preloader
-    if (!coin) {
-        return <MainLayout>
-            <div className="text-center">
-                <div className="spinner-border" role="status">
-                    <span className="visually-hidden">Loading...</span>
-                </div>
-            </div>
-        </MainLayout>
-    }
-
     // Src to image
     const srcToImageType: unknown = coin ? Object.values(coin.images)[1] : '';
     const srcToImage: string = srcToImageType as string;
+
+    // Preloader
+    if (!coin) {
+        return <Preloader />
+    }
 
     // Render page
     return (

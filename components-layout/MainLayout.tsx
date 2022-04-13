@@ -2,7 +2,6 @@ import Link from "next/dist/client/link"
 import Head from "next/dist/shared/lib/head"
 import 'bootstrap/dist/css/bootstrap.css';
 import { useEffect } from "react";
-import getAllСryptocurrencies from '../api/getAllСryptocurrencies';
 
 export function MainLayout({ children, title = 'Next App CryptoCurrencies' }: any) {
     useEffect(() => { typeof document !== undefined ? require('bootstrap/dist/js/bootstrap') : null }, [])
@@ -15,22 +14,36 @@ export function MainLayout({ children, title = 'Next App CryptoCurrencies' }: an
                 <meta name="description" content="This is my posts description"></meta>
                 <meta name="charSet" content="utf-8"></meta>
             </Head>
-            <h2>Navigation</h2>
-            <nav>
-                <Link href={'/'}><a>Home</a></Link>
-                <Link href={'/converter'}><a>Converter</a></Link>
-                <Link href={'/coin'}><a>Coin List</a></Link>
+            <nav className="navbar">
+                <div className="navbarMenu">
+                    <Link href={'/'}><a>Home</a></Link>
+                    <Link href={'/converter'}><a>Converter</a></Link>
+                    <Link href={'/coin'}><a>Coin List</a></Link>
+                </div>
+                <div className="navbarLogin">
+                    <form className="d-flex">
+                        <Link href={'/api/auth/signin'}><button className="btn btn-warning logBtn" type="submit">Login</button></Link>
+                        <Link href={'/api/auth/signout'}><button className="btn btn-warning logBtn" type="submit">Logout</button></Link>
+                    </form>
+                </div>
             </nav>
             <main>
                 {children}
             </main>
-
             <footer className="footer">
-                <p>Footer 2022. by khorek</p>
+                <p>Footer 2022. by Khorek</p>
             </footer>
 
             <style jsx global>
                 {`
+                    header {
+                        display: flex;
+                        flex-direction: row;
+                    }
+                    header-loginForm {
+                        font-size: 25px;
+                        color: white;
+                    }
                     nav { 
                         position: fixed;
                         height: 60px;
@@ -50,7 +63,11 @@ export function MainLayout({ children, title = 'Next App CryptoCurrencies' }: an
                     nav a:hover {
                         color: lightblue;
                     }
-
+                    .logBtn {
+                        margin: auto 15px;
+                        color: #100873;
+                        background: #FFF673;
+                    }
                     footer {
                         position: fixed;
                         height: 60px;

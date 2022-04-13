@@ -11,6 +11,22 @@
     text-align: center;
 }
 
+.navbar {
+  display: flex;
+  justify-content: space-around !important;
+}
+
+.navbarMenu {
+  min-width: 60%;
+  display: flex;
+  justify-content: space-between;
+  margin: auto 10px;
+}
+
+.navbarLogin {
+  max-width: 40%;
+}
+
 
 .App-logo {
     height: 40vmin;

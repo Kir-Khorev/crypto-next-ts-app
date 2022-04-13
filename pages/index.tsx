@@ -6,6 +6,7 @@ import { MainLayout } from '../components-layout/MainLayout'
 import logo from '../assets/favicon.ico';
 import { NextPageContext } from "next";
 import { useEffect, useState } from "react";
+import { Preloader } from '../components-layout/preloader'
 
 const Home: NextPage = ({ ath: serverAthData }: any) => {
   const [ath, setAth] = useState(serverAthData);
@@ -22,13 +23,9 @@ const Home: NextPage = ({ ath: serverAthData }: any) => {
   }, [])
 
   // Preloader
-  if (!ath) (
-    <div className="text-center">
-      <div className="spinner-border" role="status">
-        <span className="visually-hidden">Loading...</span>
-      </div>
-    </div>
-  )
+  if (!ath) {
+    return <Preloader />
+  }
 
   // ATH price
   const athPrice = ath.data.athPrice.USD;
@@ -43,20 +40,20 @@ const Home: NextPage = ({ ath: serverAthData }: any) => {
   // Render page
   return (
     <>
-      <MainLayout title={'Home Page | Next.js'}>
+      <MainLayout title={'Home Page'}>
         <div>
           <Head>
             <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             <meta name="description" content="Meta description for the Home page" />
           </Head>
           <div className="app-header">
-            <h1>Home Page 1. Next.js Crypto SPA</h1>
+            <h1>Home Page. NextJS Crypto SPA</h1>
             <Image src={logo} alt="me" width="64" height="64" className="App-logo" style={{ width: '100px', margin: 'auto' }} />
             {/* AthData */}
             <div className='ath'>
-                <p>Bitcoin ATH: ${ath ? ath.data.athPrice.USD.toFixed(2) : 'No data'}</p>
-                <p>From ATH: <span>{fromATH.toFixed(2)}%</span></p>
-                <p>To ATH: <span>{toATH.toFixed(2)}%</span></p>
+              <p>Bitcoin ATH: ${ath ? ath.data.athPrice.USD.toFixed(2) : 'No data'}</p>
+              <p>From ATH: <span>{fromATH.toFixed(2)}%</span></p>
+              <p>To ATH: <span>{toATH.toFixed(2)}%</span></p>
             </div>
           </div>
         </div>
