@@ -23,10 +23,10 @@ export function MainLayout({ children, title = 'Next App CryptoCurrencies' }: an
                 <div className="navbarLogin">
                     {/* Login logout form */}
                     <form className="d-flex">
-                        <Link href={'https://crypto-next-ts-app.vercel.app/api/auth/signin'}>
+                        <Link href={'/api/auth/signin'}>
                             <button className="btn btn-warning logBtn" type="submit">Login</button>
                         </Link>
-                        <Link href={'https://crypto-next-ts-app.vercel.app/api/auth/signout'}>
+                        <Link href={'/api/auth/signout'}>
                             <button className="btn btn-warning logBtn" type="submit">Logout</button>
                         </Link>
                     </form>
