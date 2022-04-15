@@ -7,6 +7,9 @@ import { getProviders, signIn as signIntoProvider } from "next-auth/react";
 export function MainLayout({ children, title = 'Next App CryptoCurrencies' }: any) {
     const [providers, setProviders] = useState(null);
 
+    console.log(providers);
+    
+
     useEffect(() => {
         typeof document !== undefined ? require('bootstrap/dist/js/bootstrap') : null;
 
@@ -48,7 +51,7 @@ export function MainLayout({ children, title = 'Next App CryptoCurrencies' }: an
                     {/* Login logout form */}
                     <form className="d-flex">
                         <Link href={'/api/auth/signin'}>
-                            <button className="btn btn-warning logBtn" type="submit">Login</button>
+                            <button className="btn btn-warning logBtn" type="submit">Login1</button>
                         </Link>
                         <Link href={'/api/auth/signout'}>
                             <button className="btn btn-warning logBtn" type="submit">Logout</button>
