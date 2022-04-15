@@ -11,14 +11,14 @@ export function MainLayout({ children, title = 'Next App CryptoCurrencies' }: an
             <Head>
                 <title>{title} | Next.js</title>
                 <meta name="keywords" content="Key, My, Posts"></meta>
-                <meta name="description" content="This is my posts description"></meta>
+                <meta name="description" content="This is my crypto App description"></meta>
                 <meta name="charSet" content="utf-8"></meta>
             </Head>
             <nav className="navbar">
                 <div className="navbarMenu">
                     <Link href={'/'}><a>Home</a></Link>
                     <Link href={'/converter'}><a>Converter</a></Link>
-                    <Link href={'/coin'}><a>Coin List</a></Link>
+                    <Link href={'/coin'}><a>Coins List</a></Link>
                 </div>
                 <div className="navbarLogin">
                     {/* Login logout form */}

@@ -7,12 +7,9 @@ import Link from "next/link";
 import { ICoinItem } from '../../interfaces/coin';
 import { apiKey } from '../api/apikey';
 import { Preloader } from '../../components-layout/preloader';
-import { useSession, signIn, signOut } from "next-auth/react"
 
 const Coins: NextPage = ({ currencies: serverCurrencies }: any) => {
     const [currencies, setCurrencies] = useState(serverCurrencies);
-    // const { data } = useSession();
-    // const { accessToken }: any = data;
 
     useEffect(() => {
         async function load() {

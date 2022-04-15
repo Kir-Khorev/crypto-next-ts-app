@@ -6,6 +6,8 @@ import { useEffect, useState } from 'react';
 import CurrencyRow from './currency-row';
 import icon from '../../assets/arrow.svg';
 import Image from 'next/image';
+import { Preloader } from '../../components-layout/preloader';
+import { apiKey } from '../api/apikey';
 
 const Converter: NextPage = ({ currencies: serverCurrencies }: any) => {
     const [currencies, setCurrencies] = useState(serverCurrencies);
@@ -30,18 +32,19 @@ const Converter: NextPage = ({ currencies: serverCurrencies }: any) => {
         (e.target.validity.valid) ? setAmount(e.target.value) : setAmount(amount);
     };
 
-    // Preload
-    if (!currencies) (<div>Load...</div>)
+    // Preloader
+    if (!currencies) (<Preloader />)
 
     return (
         <>
             <MainLayout title={'Converter Page'}>
+                <Head>
+                    <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+                    <meta name="description" content="Converter Page. Info about price all crypto currencies." />
+                </Head>
                 <section className='converter'>
-                    <Head>
-                        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-                        <meta name="description" content="Converter Page. Info about price all crypto currencies." />
-                    </Head>
                     <h1>Converter Page</h1>
+
                     {/* Amount */}
                     <div className="input-group">
                         <input value={amount} onChange={handleChange} type="text" className="form-control" placeholder="1" aria-label="Recipient's username" aria-describedby="basic-addon2" />
@@ -53,7 +56,7 @@ const Converter: NextPage = ({ currencies: serverCurrencies }: any) => {
 
                     {/* Converter */}
                     <div className='currencyRows'>
-                        {/* Choose first currensies */}
+                        {/* Choose first currensie */}
                         <CurrencyRow currencyOptions={currencies.data} selectedCurrency={fromCurrency}
                             onChangeCurrency={(e: any) => setFromCurrency(e.target.value)} />
 
@@ -61,7 +64,7 @@ const Converter: NextPage = ({ currencies: serverCurrencies }: any) => {
                             <Image src={icon} width="70px" height='70px' alt='arrow-icon' />
                         </div>
 
-                        {/* Choose second currensies */}
+                        {/* Choose second currensie */}
                         <CurrencyRow currencyOptions={currencies.data} selectedCurrency={toCurrency}
                             onChangeCurrency={(e: any) => {
                                 setToCurrency(e.target.value)
@@ -84,7 +87,7 @@ export default Converter;
 // getStaticProps
 
 export async function getStaticProps(ctx: NextPageContext) {
-    const res = await fetch('https://api.cryptorank.io/v1/currencies?api_key=e3440fe2cc290ca0ad530b27be5f05cc00db9ecbcbb0d1babeaddede1b21')
+    const res = await fetch(`https://api.cryptorank.io/v1/currencies?api_key=${apiKey}`)
     const currencies = await res.json()
     return { props: { currencies } }
 }
