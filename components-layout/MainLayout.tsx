@@ -119,7 +119,7 @@ export function MainLayout({ children, title = 'Next App CryptoCurrencies' }: an
     )
 }
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps(contex: any) {
     const providers = await getProviders();
     return {
         props: {
