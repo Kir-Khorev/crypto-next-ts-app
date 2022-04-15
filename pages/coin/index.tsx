@@ -7,6 +7,8 @@ import Link from "next/link";
 import { ICoinItem } from '../../interfaces/coin';
 import { apiKey } from '../api/apikey';
 import { Preloader } from '../../components-layout/preloader';
+import React, { useContext } from "react";
+import { Context } from '../../components-layout/Context';
 
 const Coins: NextPage = ({ currencies: serverCurrencies }: any) => {
     const [currencies, setCurrencies] = useState(serverCurrencies);

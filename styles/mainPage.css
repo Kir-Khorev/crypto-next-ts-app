@@ -19,8 +19,12 @@
 .navbarMenu {
   min-width: 60%;
   display: flex;
-  justify-content: space-between;
+  justify-content: start;
   margin: auto 10px;
+}
+
+.navbarMenu a {
+  margin: 0 2rem;
 }
 
 .navbarLogin {

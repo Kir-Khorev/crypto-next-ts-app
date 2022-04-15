@@ -6,6 +6,8 @@ import { useRouter } from 'next/router'
 import Link from "next/link";
 import { apiKey } from '../api/apikey';
 import { Preloader } from '../../components-layout/preloader';
+import React, { useContext } from "react";
+import { Context } from '../../components-layout/Context';
 
 const Coin: NextPage = ({ coin: serverCoin }: any): any => {
     const router = useRouter();

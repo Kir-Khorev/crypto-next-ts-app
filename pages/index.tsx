@@ -56,7 +56,9 @@ const Home: NextPage = ({ ath: serverAthData }: any) => {
               <p>To ATH: <span>{toATH.toFixed(2)}%</span></p>
             </div>
           </div>
+
         </div>
+
       </MainLayout>
     </>
   )

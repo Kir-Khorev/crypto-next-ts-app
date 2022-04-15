@@ -1,25 +1,12 @@
 import Link from "next/dist/client/link"
 import Head from "next/dist/shared/lib/head"
 import 'bootstrap/dist/css/bootstrap.css';
-import { useEffect, useState } from "react";
-import { getProviders, signIn as signIntoProvider } from "next-auth/react";
+import { useContext, useEffect, useState } from "react";
+import gitLogo from '../assets/git.png';
+import Image from "next/image";
 
 export function MainLayout({ children, title = 'Next App CryptoCurrencies' }: any) {
-    const [providers, setProviders] = useState(null);
-
-    console.log(providers);
-    
-
-    useEffect(() => {
-        typeof document !== undefined ? require('bootstrap/dist/js/bootstrap') : null;
-
-        (async () => {
-            const res: any = await getProviders();
-            setProviders(res);
-        })();
-    }, []);
-
-    // useEffect(() => { typeof document !== undefined ? require('bootstrap/dist/js/bootstrap') : null }, [])
+    useEffect(() => { typeof document !== undefined ? require('bootstrap/dist/js/bootstrap') : null }, [])
 
     return (
         <>
@@ -30,28 +17,23 @@ export function MainLayout({ children, title = 'Next App CryptoCurrencies' }: an
                 <meta name="charSet" content="utf-8"></meta>
             </Head>
             <nav className="navbar">
+                {/* Menu */}
                 <div className="navbarMenu">
                     <Link href={'/'}><a>Home</a></Link>
                     <Link href={'/converter'}><a>Converter</a></Link>
                     <Link href={'/coin'}><a>Coins List</a></Link>
                 </div>
+                {/* Toggle theme dark/light */}
+                {/* <div className="form-check form-switch">
+                    <input className="form-check-input" onChange={() => setContext('dark')} type="checkbox" id="flexSwitchCheckDefault" />
+                    <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Dark/light theme</label>
+                </div> */}
+
+                {/* Login logout form */}
                 <div className="navbarLogin">
-                    {providers &&
-                        Object.values(providers).map((provider: any) => (
-                            <div key={provider.name}>
-                                <button
-                                    onClick={() => {
-                                        signIntoProvider(provider.id);
-                                    }}
-                                >
-                                    Sign in with {provider.name}
-                                </button>
-                            </div>
-                        ))}
-                    {/* Login logout form */}
                     <form className="d-flex">
                         <Link href={'/api/auth/signin'}>
-                            <button className="btn btn-warning logBtn" type="submit">Login1</button>
+                            <button className="btn btn-warning logBtn" type="submit">Login</button>
                         </Link>
                         <Link href={'/api/auth/signout'}>
                             <button className="btn btn-warning logBtn" type="submit">Logout</button>
@@ -64,6 +46,10 @@ export function MainLayout({ children, title = 'Next App CryptoCurrencies' }: an
             </main>
             <footer className="footer">
                 <p>Footer 2022. by Khorek</p>
+                <a href="https://github.com/khorek/crypto-next-ts-app" target="_blank">
+                    <span>Source Code: </span>
+                    <Image src={gitLogo} alt="github" />
+                </a>
             </footer>
 
             <style jsx global>
@@ -102,31 +88,29 @@ export function MainLayout({ children, title = 'Next App CryptoCurrencies' }: an
                     }
                     footer {
                         position: fixed;
-                        height: 60px;
+                        height: 70px;
                         left: 0;
                         right: 0;
                         bottom: 0;
                         background: lightcoral;
                         color: white;
                         display: flex;
-                        justify-content: space-around;
-                        align-items: center;
+                        justify-content: center;
+                        align-items: baseline;
                     }
-                    footer a {
+                    footer > * {
                         color: white;
                         text-decoration: none;
+                        transition: all ease-in .4s;
+                        margin: 15px;
+                        display: flex;
+                        align-items: center;
+                    }
+                    footer a:hover {
+                        color: #ccc;
                     }
                 `}
             </style>
         </>
     )
-}
-
-export async function getServerSideProps(contex: any) {
-    const providers = await getProviders();
-    return {
-        props: {
-            providers,
-        },
-    };
 }
