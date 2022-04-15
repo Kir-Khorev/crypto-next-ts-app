@@ -1,10 +1,22 @@
 import Link from "next/dist/client/link"
 import Head from "next/dist/shared/lib/head"
 import 'bootstrap/dist/css/bootstrap.css';
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { getProviders, signIn as signIntoProvider } from "next-auth/react";
 
 export function MainLayout({ children, title = 'Next App CryptoCurrencies' }: any) {
-    useEffect(() => { typeof document !== undefined ? require('bootstrap/dist/js/bootstrap') : null }, [])
+    const [providers, setProviders] = useState(null);
+
+    useEffect(() => {
+        typeof document !== undefined ? require('bootstrap/dist/js/bootstrap') : null;
+
+        (async () => {
+            const res: any = await getProviders();
+            setProviders(res);
+        })();
+    }, []);
+
+    // useEffect(() => { typeof document !== undefined ? require('bootstrap/dist/js/bootstrap') : null }, [])
 
     return (
         <>
@@ -21,6 +33,18 @@ export function MainLayout({ children, title = 'Next App CryptoCurrencies' }: an
                     <Link href={'/coin'}><a>Coins List</a></Link>
                 </div>
                 <div className="navbarLogin">
+                    {providers &&
+                        Object.values(providers).map((provider: any) => (
+                            <div key={provider.name}>
+                                <button
+                                    onClick={() => {
+                                        signIntoProvider(provider.id);
+                                    }}
+                                >
+                                    Sign in with {provider.name}
+                                </button>
+                            </div>
+                        ))}
                     {/* Login logout form */}
                     <form className="d-flex">
                         <Link href={'/api/auth/signin'}>
@@ -93,4 +117,13 @@ export function MainLayout({ children, title = 'Next App CryptoCurrencies' }: an
             </style>
         </>
     )
+}
+
+export async function getServerSideProps(context) {
+    const providers = await getProviders();
+    return {
+        props: {
+            providers,
+        },
+    };
 }
