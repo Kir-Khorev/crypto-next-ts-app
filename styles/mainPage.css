@@ -14,6 +14,9 @@
 .navbar {
   display: flex;
   justify-content: space-around !important;
+  flex-direction: column !important;
+  flex-wrap: nowrap !important;
+  height: 6rem;
 }
 
 .navbarMenu {
@@ -24,11 +27,12 @@
 }
 
 .navbarMenu a {
-  margin: 0 2rem;
+  margin: 0 1rem;
 }
 
 .navbarLogin {
   max-width: 40%;
+  margin: auto;
 }
 
 
@@ -61,4 +65,11 @@
   margin: 20px auto;
   font-size: 15px;
   color: lightgreen;
+}
+
+@media only screen and (min-width: 600px) {
+  .navbar {
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+  }
 }

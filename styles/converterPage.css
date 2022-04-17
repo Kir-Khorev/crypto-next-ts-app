@@ -20,11 +20,15 @@
   margin: 20px auto;  
 }
 
+.input-group input {
+  font-size: 1rem;
+}
+
 .input-group button {
   border: 1px solid white;
   color: aliceblue;
   font-size: 25px;
-  width: 6vw;
+  width: 3rem;
   padding: 10px;
 }
 
