@@ -16,11 +16,10 @@
   justify-content: space-around !important;
   flex-direction: column !important;
   flex-wrap: nowrap !important;
-  height: 6rem;
+  height: 5rem;
 }
 
 .navbarMenu {
-  min-width: 60%;
   display: flex;
   justify-content: start;
   margin: auto 10px;
@@ -31,7 +30,7 @@
 }
 
 .navbarLogin {
-  max-width: 40%;
+  display: flex;
   margin: auto;
 }
 

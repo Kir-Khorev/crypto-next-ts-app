@@ -12,7 +12,7 @@ import AppContext from '../AppContext'
 const Home: NextPage = ({ ath: serverAthData }: any) => {
   const [ath, setAth] = useState(serverAthData);
   const value = useContext(AppContext);
-  let { homeTitle } = value.state.languages;
+  let { homeTitle } = value.state.languages[value.state.setLanguageSelected];
 
   // Await and set data from Server
   useEffect(() => {

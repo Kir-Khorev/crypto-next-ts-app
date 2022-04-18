@@ -9,7 +9,10 @@ import AppContext from "../AppContext";
 export function MainLayout({ children, title = 'Next App CryptoCurrencies' }: any) {
     useEffect(() => { typeof document !== undefined ? require('bootstrap/dist/js/bootstrap') : null }, [])
     const value = useContext(AppContext);
-    let { navbarHome, navbarConverter, navbarCoinslist, login, logout } = value.state.languages;
+    let { navbarHome, navbarConverter, navbarCoinslist, login, logout } = value.state.languages[value.state.setLanguageSelected];
+
+    console.log(value);
+
 
     return (
         <>
@@ -26,15 +29,16 @@ export function MainLayout({ children, title = 'Next App CryptoCurrencies' }: an
                     <Link href={'/converter'}><a>{navbarConverter}</a></Link>
                     <Link href={'/coin'}><a>{navbarCoinslist}</a></Link>
                 </div>
-                {/* Chose Languages */}
-                <select name="lang" id="lang" value={value.state.setLanguageSelected}
-                    onChange={(e) => value.setLanguageSelected(e.target.value)} >
-                    <option value="en">English</option>
-                    <option value="es">Spanish</option>
-                </select>
+                {/* Chouse Languages */}
+
 
                 {/* Login, logout form */}
                 <div className="navbarLogin">
+                    <select className="form-select" name="lang" id="lang" value={value.state.setLanguageSelected}
+                        onChange={(e) => value.setLanguageSelected(e.target.value)}>
+                        <option value="en">English</option>
+                        <option value="es">Spanish</option>
+                    </select>
                     <form className="d-flex">
                         <Link href={'/api/auth/signin'}>
                             <button className="btn btn-warning logBtn" type="submit">{login}</button>
@@ -48,7 +52,7 @@ export function MainLayout({ children, title = 'Next App CryptoCurrencies' }: an
             <main>
                 {children}
             </main>
-            
+
             <footer className="footer">
                 <p>Footer 2022. by Khorek</p>
                 <a href="https://github.com/khorek/crypto-next-ts-app" target="_blank">
@@ -90,6 +94,9 @@ export function MainLayout({ children, title = 'Next App CryptoCurrencies' }: an
                         margin: auto 15px;
                         color: #100873;
                         background: #FFF673;
+                    }
+                    .form-select {
+                        width: 7rem;
                     }
                     footer {
                         position: fixed;

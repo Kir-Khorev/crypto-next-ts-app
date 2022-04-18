@@ -16,7 +16,7 @@ const Converter: NextPage = ({ currencies: serverCurrencies }: any) => {
     const [fromCurrency, setFromCurrency] = useState(currencies.data[0].values.USD.price);
     const [toCurrency, setToCurrency] = useState(currencies.data[4].values.USD.price);
     const value = useContext(AppContext);
-    let { navbarConverter } = value.state.languages;
+    let { navbarConverter } = value.state.languages[value.state.setLanguageSelected];
 
     useEffect(() => {
         async function load() {
@@ -76,7 +76,7 @@ const Converter: NextPage = ({ currencies: serverCurrencies }: any) => {
 
                     {/* Result */}
                     <div className='converterResult'>
-                        <h1>Result: {fromCurrency && toCurrency ? ((fromCurrency * amount) / toCurrency) : 0}</h1>
+                        <h1>Result: {fromCurrency && toCurrency ? ((fromCurrency * amount) / toCurrency).toFixed(4) : 0}</h1>
                     </div>
                 </section>
             </MainLayout>

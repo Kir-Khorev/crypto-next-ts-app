@@ -18,7 +18,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
 
   return <AppContext.Provider value={{
         state: {
-          languages: languageObject[languageSelected],
+          languages: languageObject,
           setLanguageSelected: languageSelected
         },
         setLanguageSelected: setLanguageSelected,

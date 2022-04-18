@@ -13,8 +13,8 @@ import AppContext from '../../AppContext';
 
 const Coins: NextPage = ({ currencies: serverCurrencies }: any) => {
     const [currencies, setCurrencies] = useState(serverCurrencies);
-    const valueContext = useContext(AppContext);
-    const { navbarCoinslist } = valueContext.state.languages;
+    const value = useContext(AppContext);
+    const { navbarCoinslist } = value.state.languages[value.state.setLanguageSelected];
 
     useEffect(() => {
         async function load() {
