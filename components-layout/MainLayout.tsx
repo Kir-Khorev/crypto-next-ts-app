@@ -4,9 +4,20 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { useContext, useEffect, useState } from "react";
 import gitLogo from '../assets/git.png';
 import Image from "next/image";
+import AppContext from "../AppContext";
 
 export function MainLayout({ children, title = 'Next App CryptoCurrencies' }: any) {
     useEffect(() => { typeof document !== undefined ? require('bootstrap/dist/js/bootstrap') : null }, [])
+
+    const value = useContext(AppContext);
+    let { languageSelected } = value.state.setLanguageSelected;
+    let { navbarAboutLink, navbarContactLink } = value.state.languages;
+
+
+    const handleChange = (e: any) => {
+        value.setLanguageSelected(e.target.value)
+    }
+
 
     return (
         <>
@@ -19,17 +30,42 @@ export function MainLayout({ children, title = 'Next App CryptoCurrencies' }: an
             <nav className="navbar">
                 {/* Menu */}
                 <div className="navbarMenu">
-                    <Link href={'/'}><a>Home</a></Link>
-                    <Link href={'/converter'}><a>Converter</a></Link>
+                    <Link href={'/'}><a>{navbarAboutLink} </a></Link>
+                    <Link href={'/converter'}><a>{navbarContactLink} Converter</a></Link>
                     <Link href={'/coin'}><a>Coins List</a></Link>
                 </div>
-                {/* Toggle theme dark/light */}
-                {/* <div className="form-check form-switch">
-                    <input className="form-check-input" onChange={() => setContext('dark')} type="checkbox" id="flexSwitchCheckDefault" />
-                    <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Dark/light theme</label>
-                </div> */}
+                {/* Example */}
+                <label htmlFor="cars">Here {languageSelected}:</label>
 
-                {/* Login logout form */}
+                <select name="cars" id="cars"
+                    value={languageSelected}
+                    onChange={(e) => value.setLanguageSelected(e.target.value)}
+                >
+                    <option value="en">English</option>
+                    <option value="es">Spanish</option>
+                </select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 <div className="navbarLogin">
                     <form className="d-flex">
                         <Link href={'/api/auth/signin'}>

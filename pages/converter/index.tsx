@@ -2,7 +2,8 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import { MainLayout } from '../../components-layout/MainLayout';
 import { NextPageContext } from "next";
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
+import AppContext from '../../AppContext';
 import CurrencyRow from './currency-row';
 import icon from '../../assets/arrow.svg';
 import Image from 'next/image';
@@ -14,6 +15,8 @@ const Converter: NextPage = ({ currencies: serverCurrencies }: any) => {
     const [amount, setAmount] = useState(1);
     const [fromCurrency, setFromCurrency] = useState(currencies.data[0].values.USD.price);
     const [toCurrency, setToCurrency] = useState(currencies.data[4].values.USD.price);
+    const value = useContext(AppContext);
+    let { homeTitle, homeContent } = value.state.languages;
 
     useEffect(() => {
         async function load() {
@@ -74,6 +77,9 @@ const Converter: NextPage = ({ currencies: serverCurrencies }: any) => {
                     {/* Result */}
                     <div className='converterResult'>
                         <h1>Result: {fromCurrency && toCurrency ? ((fromCurrency * amount) / toCurrency) : 0}</h1>
+                    </div>
+                    <div className="page">
+                        {homeTitle}
                     </div>
                 </section>
             </MainLayout>

@@ -5,11 +5,14 @@ import styles from '../styles/Home.module.css'
 import { MainLayout } from '../components-layout/MainLayout'
 import logo from '../assets/favicon.ico';
 import { NextPageContext } from "next";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Preloader } from '../components-layout/preloader'
+import AppContext from '../AppContext'
 
 const Home: NextPage = ({ ath: serverAthData }: any) => {
   const [ath, setAth] = useState(serverAthData);
+  const value = useContext(AppContext);
+  // let { homeTitle, homeContent } = value.state.languages;
 
   // Await and set data from Server
   useEffect(() => {
@@ -54,6 +57,10 @@ const Home: NextPage = ({ ath: serverAthData }: any) => {
               <p>Bitcoin ATH: ${ath ? ath.data.athPrice.USD.toFixed(2) : 'No data'}</p>
               <p>From ATH: <span>{fromATH.toFixed(2)}%</span></p>
               <p>To ATH: <span>{toATH.toFixed(2)}%</span></p>
+            </div>
+            <div className="page">
+              {/* <h2>{homeTitle}</h2> */}
+              {/* <p>{homeContent}</p> */}
             </div>
           </div>
 
