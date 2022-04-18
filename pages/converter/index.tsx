@@ -16,7 +16,7 @@ const Converter: NextPage = ({ currencies: serverCurrencies }: any) => {
     const [fromCurrency, setFromCurrency] = useState(currencies.data[0].values.USD.price);
     const [toCurrency, setToCurrency] = useState(currencies.data[4].values.USD.price);
     const value = useContext(AppContext);
-    let { homeTitle, homeContent } = value.state.languages;
+    let { navbarConverter } = value.state.languages;
 
     useEffect(() => {
         async function load() {
@@ -46,7 +46,7 @@ const Converter: NextPage = ({ currencies: serverCurrencies }: any) => {
                     <meta name="description" content="Converter Page. Info about price all crypto currencies." />
                 </Head>
                 <section className='converter'>
-                    <h1>Converter Page</h1>
+                    <h1>{navbarConverter}</h1>
 
                     {/* Amount */}
                     <div className="input-group">
@@ -77,9 +77,6 @@ const Converter: NextPage = ({ currencies: serverCurrencies }: any) => {
                     {/* Result */}
                     <div className='converterResult'>
                         <h1>Result: {fromCurrency && toCurrency ? ((fromCurrency * amount) / toCurrency) : 0}</h1>
-                    </div>
-                    <div className="page">
-                        {homeTitle}
                     </div>
                 </section>
             </MainLayout>

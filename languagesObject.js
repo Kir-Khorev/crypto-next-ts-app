@@ -2,16 +2,20 @@
 
 let languagesObject = {
     en: {
-        navbarAboutLink: "About 1",
-        navbarContactLink: "Contact 1",
-        homeTitle: "Home 1",
-        aboutTitle: "About",
+        navbarHome: "Home",
+        navbarConverter: "Converter",
+        navbarCoinslist: "Coins list",
+        login: "Login",
+        logout: "Logout",
+        homeTitle: "Home Page. NextJS Crypto SPA",
     },
     es: {
-        navbarAboutLink: "Sobre",
-        navbarContactLink: "Contacto",
-        homeTitle: "Hogar",
-        aboutTitle: "Sobre",
+        navbarHome: "Sobre",
+        navbarConverter: "Convertidor",
+        navbarCoinslist: "Lista de monedas",
+        login: "Acceso",
+        logout: "Cerrar sesión",
+        homeTitle: "Página de inicio. SiguienteJS Crypto SPA"
     },
 };
 

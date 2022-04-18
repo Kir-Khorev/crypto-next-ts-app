@@ -12,7 +12,7 @@ import AppContext from '../AppContext'
 const Home: NextPage = ({ ath: serverAthData }: any) => {
   const [ath, setAth] = useState(serverAthData);
   const value = useContext(AppContext);
-  // let { homeTitle, homeContent } = value.state.languages;
+  let { homeTitle } = value.state.languages;
 
   // Await and set data from Server
   useEffect(() => {
@@ -50,17 +50,13 @@ const Home: NextPage = ({ ath: serverAthData }: any) => {
             <meta name="description" content="Meta description for the Home page" />
           </Head>
           <div className="app-header">
-            <h1>Home Page. NextJS Crypto SPA</h1>
+            <h1>{homeTitle}</h1>
             <Image src={logo} alt="me" width="64" height="64" className="App-logo" style={{ width: '100px', margin: 'auto' }} />
             {/* AthData */}
             <div className='ath'>
               <p>Bitcoin ATH: ${ath ? ath.data.athPrice.USD.toFixed(2) : 'No data'}</p>
               <p>From ATH: <span>{fromATH.toFixed(2)}%</span></p>
               <p>To ATH: <span>{toATH.toFixed(2)}%</span></p>
-            </div>
-            <div className="page">
-              {/* <h2>{homeTitle}</h2> */}
-              {/* <p>{homeContent}</p> */}
             </div>
           </div>
 

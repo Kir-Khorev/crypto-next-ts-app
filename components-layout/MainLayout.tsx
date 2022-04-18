@@ -8,16 +8,8 @@ import AppContext from "../AppContext";
 
 export function MainLayout({ children, title = 'Next App CryptoCurrencies' }: any) {
     useEffect(() => { typeof document !== undefined ? require('bootstrap/dist/js/bootstrap') : null }, [])
-
     const value = useContext(AppContext);
-    let { languageSelected } = value.state.setLanguageSelected;
-    let { navbarAboutLink, navbarContactLink } = value.state.languages;
-
-
-    const handleChange = (e: any) => {
-        value.setLanguageSelected(e.target.value)
-    }
-
+    let { navbarHome, navbarConverter, navbarCoinslist, login, logout } = value.state.languages;
 
     return (
         <>
@@ -30,49 +22,25 @@ export function MainLayout({ children, title = 'Next App CryptoCurrencies' }: an
             <nav className="navbar">
                 {/* Menu */}
                 <div className="navbarMenu">
-                    <Link href={'/'}><a>{navbarAboutLink} </a></Link>
-                    <Link href={'/converter'}><a>{navbarContactLink} Converter</a></Link>
-                    <Link href={'/coin'}><a>Coins List</a></Link>
+                    <Link href={'/'}><a>{navbarHome}</a></Link>
+                    <Link href={'/converter'}><a>{navbarConverter}</a></Link>
+                    <Link href={'/coin'}><a>{navbarCoinslist}</a></Link>
                 </div>
-                {/* Example */}
-                <label htmlFor="cars">Here {languageSelected}:</label>
-
-                <select name="cars" id="cars"
-                    value={languageSelected}
-                    onChange={(e) => value.setLanguageSelected(e.target.value)}
-                >
+                {/* Chose Languages */}
+                <select name="lang" id="lang" value={value.state.setLanguageSelected}
+                    onChange={(e) => value.setLanguageSelected(e.target.value)} >
                     <option value="en">English</option>
                     <option value="es">Spanish</option>
                 </select>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                {/* Login, logout form */}
                 <div className="navbarLogin">
                     <form className="d-flex">
                         <Link href={'/api/auth/signin'}>
-                            <button className="btn btn-warning logBtn" type="submit">Login</button>
+                            <button className="btn btn-warning logBtn" type="submit">{login}</button>
                         </Link>
                         <Link href={'/api/auth/signout'}>
-                            <button className="btn btn-warning logBtn" type="submit">Logout</button>
+                            <button className="btn btn-warning logBtn" type="submit">{logout}</button>
                         </Link>
                     </form>
                 </div>
@@ -80,6 +48,7 @@ export function MainLayout({ children, title = 'Next App CryptoCurrencies' }: an
             <main>
                 {children}
             </main>
+            
             <footer className="footer">
                 <p>Footer 2022. by Khorek</p>
                 <a href="https://github.com/khorek/crypto-next-ts-app" target="_blank">

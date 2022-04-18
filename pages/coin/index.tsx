@@ -9,9 +9,12 @@ import { apiKey } from '../api/apikey';
 import { Preloader } from '../../components-layout/preloader';
 import React, { useContext } from "react";
 import { Context } from '../../components-layout/Context';
+import AppContext from '../../AppContext';
 
 const Coins: NextPage = ({ currencies: serverCurrencies }: any) => {
     const [currencies, setCurrencies] = useState(serverCurrencies);
+    const valueContext = useContext(AppContext);
+    const { navbarCoinslist } = valueContext.state.languages;
 
     useEffect(() => {
         async function load() {
@@ -37,7 +40,7 @@ const Coins: NextPage = ({ currencies: serverCurrencies }: any) => {
                         <meta name="description" content="Currencies List Page. Info table." />
                     </Head>
                     <div className="watchlist">
-                        <h2>CoinsList Page</h2>
+                        <h2>{navbarCoinslist}</h2>
                         <table className="table table-hover table-sm table-responsive">
                             <thead className="table-dark">
                                 <tr className="table-light">
