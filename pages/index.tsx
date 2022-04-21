@@ -10,20 +10,15 @@ import { Preloader } from '../components-layout/preloader'
 import AppContext from '../AppContext'
 
 import { useAppDispatch, useAppSelector } from '../hooks'
-// import { decrement, increment, incrementByAmount, selectCount } from '../features/counter/counterSlice'
-import { decrement, increment, incrementByAmount, selectCount } from '../features/counter'
 
 // import { getKanyeQuote, selectKanye } from '../features/kanye/kanyeSlice';
-import { getKanyeQuote, kanyeQuoteSelector } from '../features/kanye';
+// import { getKanyeQuote, kanyeQuoteSelector } from '../features/kanye';
 
 const Home: NextPage = ({ ath: serverAthData }: any) => {
   const dispatch = useAppDispatch();
-  const count = useAppSelector(selectCount);
-  const [incrementAmount, setIncrementAmount] = useState<number>(0);
   // kanye
   // const { data, pending, error } = useAppSelector(selectKanye);
-  const { data, pending, error }: any = useAppSelector(kanyeQuoteSelector);
-
+  // const { data, pending, error }: any = useAppSelector(kanyeQuoteSelector);
 
   // 
   const [ath, setAth] = useState(serverAthData);
