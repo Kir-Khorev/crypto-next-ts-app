@@ -9,7 +9,23 @@ import { useEffect, useState, useContext } from "react";
 import { Preloader } from '../components-layout/preloader'
 import AppContext from '../AppContext'
 
+import { useAppDispatch, useAppSelector } from '../hooks'
+// import { decrement, increment, incrementByAmount, selectCount } from '../features/counter/counterSlice'
+import { decrement, increment, incrementByAmount, selectCount } from '../features/counter'
+
+// import { getKanyeQuote, selectKanye } from '../features/kanye/kanyeSlice';
+import { getKanyeQuote, kanyeQuoteSelector } from '../features/kanye';
+
 const Home: NextPage = ({ ath: serverAthData }: any) => {
+  const dispatch = useAppDispatch();
+  const count = useAppSelector(selectCount);
+  const [incrementAmount, setIncrementAmount] = useState<number>(0);
+  // kanye
+  // const { data, pending, error } = useAppSelector(selectKanye);
+  const { data, pending, error }: any = useAppSelector(kanyeQuoteSelector);
+
+
+  // 
   const [ath, setAth] = useState(serverAthData);
   const value = useContext(AppContext);
   let { homeTitle } = value.state.languages[value.state.setLanguageSelected];
@@ -58,9 +74,24 @@ const Home: NextPage = ({ ath: serverAthData }: any) => {
               <p>From ATH: <span>{fromATH.toFixed(2)}%</span></p>
               <p>To ATH: <span>{toATH.toFixed(2)}%</span></p>
             </div>
-          </div>
+            {/* ============ */}
 
+            {/* KANYE EXAMPLE */}
+
+            {/* <div>
+              <h2>Generate random Kanye West quote</h2>
+              {pending && <p>Loading...</p>}
+              {data && <p>{data.quote}</p>}
+              {error && <p>Oops, something went wrong</p>}
+              <button onClick={() => dispatch(getKanyeQuote())} disabled={pending}>
+                Generate Kanye Quote
+              </button>
+            </div> */}
+
+            {/* KANYE EXAMPLE */}
+          </div>
         </div>
+
 
       </MainLayout>
     </>

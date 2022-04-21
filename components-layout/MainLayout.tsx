@@ -29,16 +29,15 @@ export function MainLayout({ children, title = 'Next App CryptoCurrencies' }: an
                     <Link href={'/converter'}><a>{navbarConverter}</a></Link>
                     <Link href={'/coin'}><a>{navbarCoinslist}</a></Link>
                 </div>
-                {/* Chouse Languages */}
 
-
-                {/* Login, logout form */}
                 <div className="navbarLogin">
+                    {/* Chouse language */}
                     <select className="form-select" name="lang" id="lang" value={value.state.setLanguageSelected}
                         onChange={(e) => value.setLanguageSelected(e.target.value)}>
                         <option value="en">English</option>
                         <option value="es">Spanish</option>
                     </select>
+                    {/* Login, logout form */}
                     <form className="d-flex">
                         <Link href={'/api/auth/signin'}>
                             <button className="btn btn-warning logBtn" type="submit">{login}</button>

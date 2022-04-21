@@ -9,14 +9,20 @@ import icon from '../../assets/arrow.svg';
 import Image from 'next/image';
 import { Preloader } from '../../components-layout/preloader';
 import { apiKey } from '../api/apikey';
+// Redux
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { decrement, increment, incrementByAmount, selectCount } from '../../features/counter';
 
 const Converter: NextPage = ({ currencies: serverCurrencies }: any) => {
     const [currencies, setCurrencies] = useState(serverCurrencies);
-    const [amount, setAmount] = useState(1);
     const [fromCurrency, setFromCurrency] = useState(currencies.data[0].values.USD.price);
     const [toCurrency, setToCurrency] = useState(currencies.data[4].values.USD.price);
     const value = useContext(AppContext);
     let { navbarConverter } = value.state.languages[value.state.setLanguageSelected];
+
+    // AppRedux
+    const dispatchApp = useAppDispatch();
+    const countApp = useAppSelector(selectCount);
 
     useEffect(() => {
         async function load() {
@@ -27,13 +33,6 @@ const Converter: NextPage = ({ currencies: serverCurrencies }: any) => {
             load()
         }
     }, [])
-
-    // Set Amount:
-    let incAmount = () => setAmount(Number(amount) + 1);
-    let decAmount = () => amount > 0 ? setAmount(amount - 1) : '';
-    let handleChange = (e: any): void => {
-        (e.target.validity.valid) ? setAmount(e.target.value) : setAmount(amount);
-    };
 
     // Preloader
     if (!currencies) (<Preloader />)
@@ -47,41 +46,34 @@ const Converter: NextPage = ({ currencies: serverCurrencies }: any) => {
                 </Head>
                 <section className='converter'>
                     <h1>{navbarConverter}</h1>
-
                     {/* Amount */}
                     <div className="input-group">
-                        <input value={amount} onChange={handleChange} type="text" className="form-control" placeholder="1" aria-label="Recipient's username" aria-describedby="basic-addon2" />
+                        <input value={countApp} onChange={(e) => dispatchApp(incrementByAmount(Number(e.target.value)))}
+                            type="number" className="form-control" placeholder="0" aria-label="Recipient's username" aria-describedby="basic-addon2" />
                         <div className="input-group-append">
-                            <button onClick={() => incAmount()} className="btn btn-outline-secondary" type="button">+</button>
-                            <button onClick={() => decAmount()} className="btn btn-outline-secondary" type="button">-</button>
+                            <button onClick={() => dispatchApp(increment())} className="btn btn-outline-secondary" type="button">+</button>
+                            <button onClick={() => dispatchApp(decrement())} className="btn btn-outline-secondary" type="button">-</button>
                         </div>
                     </div>
-
                     {/* Converter */}
                     <div className='currencyRows'>
                         {/* Choose first currensie */}
                         <CurrencyRow currencyOptions={currencies.data} selectedCurrency={fromCurrency}
                             onChangeCurrency={(e: any) => setFromCurrency(e.target.value)} />
-
                         <div className='currencyRow--icon'>
                             <Image src={icon} width="70px" height='70px' alt='arrow-icon' />
                         </div>
-
                         {/* Choose second currensie */}
                         <CurrencyRow currencyOptions={currencies.data} selectedCurrency={toCurrency}
-                            onChangeCurrency={(e: any) => {
-                                setToCurrency(e.target.value)
-                            }} />
+                            onChangeCurrency={(e: any) => setToCurrency(e.target.value)} />
                     </div>
-
                     {/* Result */}
                     <div className='converterResult'>
-                        <h1>Result: {fromCurrency && toCurrency ? ((fromCurrency * amount) / toCurrency).toFixed(4) : 0}</h1>
+                        <h1>Result: {fromCurrency && toCurrency ? ((fromCurrency * countApp) / toCurrency).toFixed(4) : 0}</h1>
                     </div>
                 </section>
             </MainLayout>
         </>
-
     )
 }
 

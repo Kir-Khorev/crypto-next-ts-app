@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.8.1",
     "@types/bootstrap": "^5.1.9",
     "@types/material-ui": "^0.21.12",
     "@types/materialize-css": "^1.0.11",
@@ -25,6 +26,7 @@
     "react": "18.0.0",
     "react-bootstrap-table-pro": "^0.0.5",
     "react-dom": "18.0.0",
+    "react-redux": "^8.0.0",
     "styled-components": "^5.3.5",
     "webpack": "4.20.2",
     "webpack-dev-server": "^4.8.1"

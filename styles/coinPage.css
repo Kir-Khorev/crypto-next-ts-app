@@ -1,8 +1,8 @@
 .coinCardItem {
-    max-width: 50%;
+    max-width: 70%;
     margin: 50px auto;
     background: rgba(71, 255, 252, 0.332) !important;
-    margin: 5rem auto;
+    margin: 5vw auto;
 }
 
 .card-body {

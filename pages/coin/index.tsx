@@ -1,4 +1,4 @@
-import type { NextPage } from 'next'
+import type { GetStaticProps, NextPage } from 'next'
 import Head from 'next/head'
 import { NextPageContext } from "next";
 import { MainLayout } from '../../components-layout/MainLayout'
@@ -8,7 +8,6 @@ import { ICoinItem } from '../../interfaces/coin';
 import { apiKey } from '../api/apikey';
 import { Preloader } from '../../components-layout/preloader';
 import React, { useContext } from "react";
-import { Context } from '../../components-layout/Context';
 import AppContext from '../../AppContext';
 
 const Coins: NextPage = ({ currencies: serverCurrencies }: any) => {
@@ -53,11 +52,11 @@ const Coins: NextPage = ({ currencies: serverCurrencies }: any) => {
                             </thead>
                             <tbody>
                                 {
-                                    currencies.data.map((item: ICoinItem) => {
+                                    currencies.data.map((item: ICoinItem, index: number) => {
                                         return (
                                             <Link key={item.id} href={`/coin/[id]`} as={`/coin/${item.id}`}>
                                                 <tr className="watchlistItem">
-                                                    <td>{item.id}</td>
+                                                    <td>{index + 1}</td>
                                                     <td>{item.name} ({item.symbol})</td>
                                                     <td>${parseFloat(item.values.USD.price).toFixed(3)}</td>
                                                     <td>{item.totalSupply.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")}</td>
@@ -80,7 +79,7 @@ export default Coins;
 
 // getStaticProps 
 
-export async function getStaticProps(ctx: NextPageContext) {
+export async function getStaticProps (ctx: NextPageContext) {
     const res = await fetch(`https://api.cryptorank.io/v1/currencies?api_key=${apiKey}`)
     const currencies = await res.json()
     return { props: { currencies } }

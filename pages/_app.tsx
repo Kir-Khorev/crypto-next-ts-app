@@ -5,6 +5,8 @@ import type { AppProps } from 'next/app'
 import { useEffect, useState } from "react";
 import AppContext from '../AppContext';
 import languagesObject from '../languagesObject';
+import { store } from '../store';
+import { Provider } from 'react-redux';
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   const [languageSelected, setLanguageSelected] = useState('en');
@@ -16,14 +18,17 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
 
   useEffect(() => { typeof document !== undefined ? require('bootstrap/dist/js/bootstrap') : null }, [])
 
-  return <AppContext.Provider value={{
+  return <AppContext.Provider  value={{
         state: {
           languages: languageObject,
           setLanguageSelected: languageSelected
         },
         setLanguageSelected: setLanguageSelected,
+        store: store
       }}>
-        <Component {...pageProps} />
+        <Provider store={store}>
+            <Component {...pageProps} />
+        </Provider>
   </AppContext.Provider>
 }
 
