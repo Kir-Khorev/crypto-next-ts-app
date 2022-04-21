@@ -34,7 +34,7 @@ const Home: NextPage = ({ ath: serverAthData }: any) => {
     if (!serverAthData) {
       load()
     }
-  }, [])
+  }, [serverAthData])
 
   // Preloader
   if (!ath) {

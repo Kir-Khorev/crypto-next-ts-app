@@ -38,7 +38,7 @@ const Coin: NextPage = ({ coin: serverCoin }: any): any => {
         if (!serverCoin) {
             load()
         }
-    }, [])
+    }, [serverCoin])
 
 
     // Src to image
