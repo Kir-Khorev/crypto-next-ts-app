@@ -1,9 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import {
-    decrement,
-    increment,
-    incrementByAmount,
-} from './actions';
+import { decrement, increment, incrementByAmount, } from './actions';
 
 type CounterState = {
     value: number;
@@ -19,7 +15,7 @@ export const counterReducer = createReducer(initialState, builder => {
             state.value++;
         })
         .addCase(decrement, state => {
-            state.value--;
+            state.value > 0 ? state.value-- : 0;
         })
         .addCase(incrementByAmount, (state, action) => {
             state.value = action.payload;

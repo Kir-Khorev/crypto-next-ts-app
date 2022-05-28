@@ -9,6 +9,5 @@ export const Preloader = () => {
                 </div>
             </div>
         </MainLayout>
-
     )
 }

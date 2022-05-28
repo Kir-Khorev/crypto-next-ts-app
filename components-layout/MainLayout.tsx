@@ -11,9 +11,6 @@ export function MainLayout({ children, title = 'Next App CryptoCurrencies' }: an
     const value = useContext(AppContext);
     let { navbarHome, navbarConverter, navbarCoinslist, login, logout } = value.state.languages[value.state.setLanguageSelected];
 
-    console.log(value);
-
-
     return (
         <>
             <Head>
@@ -51,7 +48,6 @@ export function MainLayout({ children, title = 'Next App CryptoCurrencies' }: an
             <main>
                 {children}
             </main>
-
             <footer className="footer">
                 <p>Footer 2022. by Khorek</p>
                 <a href="https://github.com/khorek/crypto-next-ts-app" target="_blank">
@@ -59,7 +55,6 @@ export function MainLayout({ children, title = 'Next App CryptoCurrencies' }: an
                     <Image src={gitLogo} alt="github" />
                 </a>
             </footer>
-
             <style jsx global>
                 {`
                     header {
