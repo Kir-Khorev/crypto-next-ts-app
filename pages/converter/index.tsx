@@ -2,7 +2,7 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import { MainLayout } from '../../components-layout/MainLayout';
 import { NextPageContext } from "next";
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState, useContext, useMemo, useCallback } from 'react';
 import AppContext from '../../AppContext';
 import CurrencyRow from './currency-row';
 import icon from '../../assets/arrow.svg';
@@ -10,13 +10,13 @@ import Image from 'next/image';
 import { Preloader } from '../../components-layout/preloader';
 import { apiKey } from '../api/apikey';
 // Redux
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { decrement, increment, incrementByAmount, selectCount } from '../../features/counter';
 
 const Converter: NextPage = ({ currencies: serverCurrencies }: any) => {
     const [currencies, setCurrencies] = useState(serverCurrencies);
-    const [fromCurrency, setFromCurrency] = useState(currencies.data[0].values.USD.price);
-    const [toCurrency, setToCurrency] = useState(currencies.data[4].values.USD.price);
+    const [fromCurrency, setFromCurrency] = useState(currencies[0].values.USD.price);
+    const [toCurrency, setToCurrency] = useState(currencies[4].values.USD.price);
     const value = useContext(AppContext);
     let { navbarConverter } = value.state.languages[value.state.setLanguageSelected];
 
@@ -26,7 +26,7 @@ const Converter: NextPage = ({ currencies: serverCurrencies }: any) => {
 
     useEffect(() => {
         async function load() {
-            const json = await currencies.json()
+            const json = await currencies.data;
             setCurrencies(json)
         }
         if (!serverCurrencies) {
@@ -37,8 +37,15 @@ const Converter: NextPage = ({ currencies: serverCurrencies }: any) => {
     // Preloader
     if (!currencies) (<Preloader />)
 
+    // useCallback calculate result
+    const memoizedCallbackResult = useCallback(function () {
+        return ((fromCurrency * countApp) / toCurrency).toFixed(4)
+    }, [countApp, fromCurrency, toCurrency]);
+
+
     return (
         <>
+
             <MainLayout title={'Converter Page'}>
                 <Head>
                     <meta name="viewport" content="initial-scale=1.0, width=device-width" />
@@ -58,18 +65,18 @@ const Converter: NextPage = ({ currencies: serverCurrencies }: any) => {
                     {/* Converter */}
                     <div className='currencyRows'>
                         {/* Choose first currensie */}
-                        <CurrencyRow currencyOptions={currencies.data} selectedCurrency={fromCurrency}
+                        <CurrencyRow currencyOptions={currencies} selectedCurrency={fromCurrency}
                             onChangeCurrency={(e: any) => setFromCurrency(e.target.value)} />
                         <div className='currencyRow--icon'>
                             <Image src={icon} width="70px" height='70px' alt='arrow-icon' />
                         </div>
                         {/* Choose second currensie */}
-                        <CurrencyRow currencyOptions={currencies.data} selectedCurrency={toCurrency}
+                        <CurrencyRow currencyOptions={currencies} selectedCurrency={toCurrency}
                             onChangeCurrency={(e: any) => setToCurrency(e.target.value)} />
                     </div>
                     {/* Result */}
                     <div className='converterResult'>
-                        <h1>Result: {fromCurrency && toCurrency ? ((fromCurrency * countApp) / toCurrency).toFixed(4) : 0}</h1>
+                        <h1>Result: {fromCurrency && toCurrency ? memoizedCallbackResult() : 0}</h1>
                     </div>
                 </section>
             </MainLayout>
@@ -80,9 +87,8 @@ const Converter: NextPage = ({ currencies: serverCurrencies }: any) => {
 export default Converter;
 
 // getStaticProps
-
 export async function getStaticProps(ctx: NextPageContext) {
     const res = await fetch(`https://api.cryptorank.io/v1/currencies?api_key=${apiKey}`)
     const currencies = await res.json()
-    return { props: { currencies } }
+    return { props: { currencies: currencies.data } }
 }

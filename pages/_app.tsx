@@ -5,7 +5,7 @@ import type { AppProps } from 'next/app'
 import { useEffect, useState } from "react";
 import AppContext from '../AppContext';
 import languagesObject from '../languagesObject';
-import { store } from '../store';
+import { store } from '../redux/store';
 import { Provider } from 'react-redux';
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {

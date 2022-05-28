@@ -54,7 +54,7 @@ const Coins: NextPage = ({ currencies: serverCurrencies }: any) => {
                                 {
                                     currencies.data.map((item: ICoinItem, index: number) => {
                                         return (
-                                            <Link key={item.id} href={`/coin/[id]`} as={`/coin/${item.id}`}>
+                                            <Link key={item.id} href={`/coin/[name]`} as={`/coin/${item.id}`}>
                                                 <tr className="watchlistItem">
                                                     <td>{index + 1}</td>
                                                     <td>{item.name} ({item.symbol})</td>

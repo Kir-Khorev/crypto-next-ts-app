@@ -1,3 +1,4 @@
+import React from "react";
 import Head from 'next/head'
 import type { NextPage } from 'next'
 import { useState, useEffect } from "react";
@@ -6,7 +7,6 @@ import { useRouter } from 'next/router'
 import Link from "next/link";
 import { apiKey } from '../api/apikey';
 import { Preloader } from '../../components-layout/preloader';
-import React, { useContext } from "react";
 
 type CoinType = {
     id: number;
@@ -17,12 +17,13 @@ type CoinType = {
     totalSupply: number;
     type?: string;
     data: any;
-    // coin: any;
     values: any;
     images: string;
     links: Array<string> | any;
     volume24hBase: number | string
 }
+
+
 
 const Coin: NextPage = ({ coin: serverCoin }: any): any => {
     const router = useRouter();
@@ -32,7 +33,6 @@ const Coin: NextPage = ({ coin: serverCoin }: any): any => {
         async function load() {
             const res = await fetch(`https://api.cryptorank.io/v1/currencies/${router.query.id}?api_key=${apiKey}`);
             const data = await res.json()
-            console.log("data", coin);
             setCoin(data)
         }
         if (!serverCoin) {
@@ -40,18 +40,13 @@ const Coin: NextPage = ({ coin: serverCoin }: any): any => {
         }
     }, [serverCoin])
 
-
     // Src to image
     const srcToImageType: unknown = coin ? Object.values(coin.data.images)[1] : '';
     const srcToImage: string = srcToImageType as string;
 
     // Preloader
-    if (!coin) {
-        return <Preloader />
-    }
+    if (!coin) return <Preloader />
 
-    console.log(coin);
-    
     // Render page
     return (
         <MainLayout>
@@ -84,13 +79,12 @@ const Coin: NextPage = ({ coin: serverCoin }: any): any => {
 
 export default Coin;
 
-// SSR
+// SSR. getServerSideProps
 
 export const getServerSideProps = async (ctx: any) => {
     if (!ctx.req) {
         return { coin: null }
     }
-
     const res = await fetch(`https://api.cryptorank.io/v1/currencies/${ctx.query.id}?api_key=${apiKey}`)
     const coin = await res.json()
     return {
@@ -100,17 +94,29 @@ export const getServerSideProps = async (ctx: any) => {
     }
 }
 
-// Get initial Props
 
-// Coin.getInitialProps = async (ctx: any) => {
-//     // Context Object
-//     if (!ctx.req) {
-//         return { coin: null }
+// SSG and getStaticPaths (example)
+
+// export const getStaticProps = async (ctx: any) => {
+//     const res = await fetch(`https://api.cryptorank.io/v1/currencies/${ctx.params.id}?api_key=${apiKey}`)
+//     const coin: any = await res.json()
+//     if (!coin) {
+//         return { notFound: true }
 //     }
-//     const res = await fetch(`https://api.cryptorank.io/v1/currencies/${ctx.query.id}?api_key=${apiKey}`)
-//     const coin = await res.json()
-
 //     return {
-//         coin
+//         props: { coin: coin },
+//     }
+// }
+
+// export const getStaticPaths = async () => {
+//     const res = await fetch(`https://api.cryptorank.io/v1/currencies?api_key=${apiKey}`);
+//     const data = await res.json();
+
+//     const paths = data.data.map(({ id }: any) => ({
+//         params: { id: id.toString() },
+//     }));
+//     return {
+//         paths,
+//         fallback: false // for 404 error
 //     }
 // }
